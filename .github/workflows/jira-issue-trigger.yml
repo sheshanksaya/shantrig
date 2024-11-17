@@ -1,0 +1,19 @@
+name: Jira Issue Trigger
+
+on:
+  repository_dispatch:
+    types: [jira_issue_created]
+
+jobs:
+  trigger-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up HTML File
+        run: |
+          echo "<!DOCTYPE html><html><head><title>Success</title></head><body><h1>Hi Success</h1></body></html>" > success.html
+
+      - name: Upload HTML Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: success-page
+          path: success.html
